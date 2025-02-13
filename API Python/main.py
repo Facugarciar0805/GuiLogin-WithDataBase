@@ -49,11 +49,11 @@ def pushUsuario(nombre, apellido='surname', mail='noMail', edad=0, documento=0):
 
 nombre = 'Pedro'
 
-if eleccion == 1:
+if eleccion == '1':
     
     # pushUsuario(nombre, apellido, mail, edad, documento) 
     pushUsuario(nombre)
-elif eleccion == 2:
+elif eleccion == '2':
     cursor.execute(f"SELECT * FROM users where name = '{nombre}'")
     resultados = cursor.fetchall()
     print(True)

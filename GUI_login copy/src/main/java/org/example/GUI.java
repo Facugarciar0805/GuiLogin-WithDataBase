@@ -123,7 +123,7 @@ public class GUI implements ActionListener {
                 String password = passwordText.getText();
                 try {
                     String arg = "2";
-                    ProcessBuilder processBuilder = new ProcessBuilder("python3", "src/main/resources/main copy.py", arg, name);
+                    ProcessBuilder processBuilder = new ProcessBuilder("py", "GUI_login copy/src/main/resources/mainCopy.py", arg, name);
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
