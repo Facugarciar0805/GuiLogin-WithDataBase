@@ -1,6 +1,12 @@
 import mysql.connector
+import sys
 
-#definir variables
+eleccion = sys.argv[1]
+nombre = sys.argv[2] 
+
+
+
+
 
 
 
@@ -14,18 +20,18 @@ cursor=conexion.cursor()
 #Ejecutar la consulta
 
 
-def ingresoUsuario():
-    nombre = input("Ingrese su nombre: ")
-    apellido = input("Ingrese su apellido: ")
-    mail = input("Ingrese su mail: ")
-    edad = input("Ingrese su edad: ")
-    documento = input("Ingrese su DNI: ")
+# def ingresoUsuario():
+#      nombre = input("Ingrese su nombre: ")
+#      apellido = input("Ingrese su apellido: ")
+#      mail = input("Ingrese su mail: ")
+#      edad = input("Ingrese su edad: ")
+#      documento = input("Ingrese su DNI: ")
     
-    return nombre, apellido, mail, edad, documento
+#      return nombre, apellido, mail, edad, documento
     
  
     
-def pushUsuario(nombre, apellido, mail, edad, documento):
+def pushUsuario(nombre, apellido='surname', mail='noMail', edad=0, documento=0):
     sql = "INSERT INTO users (name, surname, email, age, dni) VALUES (%s, %s, %s, %s, %s)"
     cursor.execute(sql, (nombre, apellido, mail, int(edad), int(documento)))
     conexion.commit()  # Guardar los cambios en la BD
@@ -35,20 +41,22 @@ def pushUsuario(nombre, apellido, mail, edad, documento):
 
     
 
-eleccion = input("Que desea hacer: " '\n'
-                 "1-Ingresar un usuario nuevo"'\n'
-                 "2-Ver los usuarios ingresados"'\n')
+# eleccion = input("Que desea hacer: " '\n'
+#                   "1-Ingresar un usuario nuevo"'\n'
+#                   "2-Ver los usuarios ingresados"'\n')
 
 
 
+nombre = 'Pedro'
 
-
-if eleccion == '1':
-    nombre, apellido, mail, edad, documento = ingresoUsuario()
-    pushUsuario(nombre, apellido, mail, edad, documento) 
-elif eleccion == '2':
-    cursor.execute("SELECT * FROM users")
+if eleccion == 1:
+    
+    # pushUsuario(nombre, apellido, mail, edad, documento) 
+    pushUsuario(nombre)
+elif eleccion == 2:
+    cursor.execute(f"SELECT * FROM users where name = '{nombre}'")
     resultados = cursor.fetchall()
+    print(True)
     for fila in resultados:
         print(fila)
 
