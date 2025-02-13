@@ -3,6 +3,9 @@ package org.example;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,28 +121,27 @@ public class GUI implements ActionListener {
             case "Login":
                 String name = userText.getText();
                 String password = passwordText.getText();
-                boolean found = false;
-                for(User user: users){
-                    if(user.getName().equals(name)){
-                        found = true;
-                        if(user.getPassword().equals(password)){
-                            //success.setText("Login successful for "+ name);
-                            frame.setVisible(false);
-                            menu.setFrame(true);
+                try {
+                    String arg = "2";
+                    ProcessBuilder processBuilder = new ProcessBuilder("python3", "src/main/resources/main copy.py", arg, name);
+                    processBuilder.redirectErrorStream(true);
+                    Process process = processBuilder.start();
+                    try {
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            System.out.println(line);  // Print Python script output
                         }
-
-                        else{
-                            success.setText("The password is incorrect");
-                        }
-                        break;
+                        int exitCode = process.waitFor();
+                        System.out.println("Python script finished with exit code: " + exitCode);
+                    }catch(IOException | InterruptedException exception){
+                        System.out.print("FALLAAA");
                     }
                 }
-                if(!found){
-                    success.setText("Your account does not exist");
+                catch(IOException exception){
+                    System.out.print("FALLAAA");
                 }
-
                 break;
-
             case "Create Account":
                 switchScene(frame, createPanel);
                 userText.setText("");
@@ -197,3 +199,29 @@ public class GUI implements ActionListener {
         frame.repaint();                   // Repaint to apply changes
     }
 }
+
+//try {
+//String arg = "Hello world!";
+// Define the command to run the Python script
+//ProcessBuilder processBuilder = new ProcessBuilder("python3", "src/main/resources/Python/intento.py", arg);
+          //  processBuilder.redirectErrorStream(true);  // Merge error and output streams
+
+// Start the process
+//Process process = processBuilder.start();
+
+// Read the output of the Python script
+           // try (
+//BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+//String line;
+              //  while ((line = reader.readLine()) != null) {
+       // System.out.println(line);  // Print Python script output
+             //   }
+                    //    }
+
+// Wait for the process to finish
+//int exitCode = process.waitFor();
+            //System.out.println("Python script finished with exit code: " + exitCode);
+
+      //  } catch (IOException | InterruptedException e) {
+       // e.printStackTrace();
+       // }
