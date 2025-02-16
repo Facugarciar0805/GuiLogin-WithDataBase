@@ -1,6 +1,8 @@
 package org.example;
 
 import javax.swing.*;
+
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -21,6 +23,8 @@ public class GUI implements ActionListener {
     private static JTextField userText;
     private static JLabel passwordLabel;
     private static JPasswordField passwordText;
+    private static JLabel surnameLabel;
+    private static JTextField surnameText;
     private static JButton loginButton;
     private static JButton createButton;
     private static JLabel success;
@@ -29,8 +33,10 @@ public class GUI implements ActionListener {
     private static JPanel createPanel;
     private static JLabel createNameLabel;
     private static JLabel createPasswordLabel;
+    private static JLabel createSurnameLabel;
     private static JTextField createNameText;
     private static JTextField createPasswordText;
+    private static JTextField createSurnameText;
     private static JLabel createTitle;
     private static JButton newCreateButton;
 
@@ -43,71 +49,80 @@ public class GUI implements ActionListener {
         menu = new Menu();
 
         //>>>>>>>>>> LOGIN SCENE  >>>>>>>>>>
-        frame = new JFrame();
-        loginPanel = new JPanel();
-        frame.setSize(350,200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+frame = new JFrame();
+loginPanel = new JPanel();
+frame.setSize(500,350);
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+frame.add(loginPanel);
+loginPanel.setLayout(null);
 
-        frame.add(loginPanel);
-        loginPanel.setLayout(null);
+userLabel = new JLabel("User: ");
+userLabel.setBounds(10,20,80,25);
+loginPanel.add(userLabel);
 
-        userLabel = new JLabel("User: ");
-        userLabel.setBounds(10,20,80,25);
-        loginPanel.add(userLabel);
+userText = new JTextField();
+userText.setBounds(100,20,165,25);
+loginPanel.add(userText);
 
-        userText = new JTextField();
-        userText.setBounds(100,20,165,25);
-        loginPanel.add(userText);
+passwordLabel = new JLabel("Password: ");
+passwordLabel.setBounds(10,50,80,20);
+loginPanel.add(passwordLabel);
 
-        passwordLabel = new JLabel("Password: ");
-        passwordLabel.setBounds(10,50,80,20);
-        loginPanel.add(passwordLabel);
+passwordText = new JPasswordField();
+passwordText.setBounds(100,50,165,25);
+loginPanel.add(passwordText);
 
-        passwordText = new JPasswordField();
-        passwordText.setBounds(100,50,165,25);
-        loginPanel.add(passwordText);
+loginButton = new JButton("Login");
+loginButton.setBounds(10,80,80,25);
+loginPanel.add(loginButton);
+loginButton.addActionListener(new GUI());
 
-        loginButton = new JButton("Login");
-        loginButton.setBounds(10,80,80,25);
-        loginPanel.add(loginButton);
-        loginButton.addActionListener(new GUI());
+createButton = new JButton("Create Account");
+createButton.setBounds(100, 80, 120, 25);
+loginPanel.add(createButton);
+createButton.addActionListener(new GUI());
 
-        createButton = new JButton("Create Account");
-        createButton.setBounds(100, 80, 120, 25);
-        loginPanel.add(createButton);
-        createButton.addActionListener((new GUI()));
+success = new JLabel("");
+success.setBounds(10,110,300,25);
+loginPanel.add(success);
 
-        success = new JLabel("");
-        success.setBounds(10,110,300,25);
-        loginPanel.add(success);
+//>>>>>>>>>>>>> CREATE SCENE >>>>>>>>>>>>
+createPanel = new JPanel();
+createPanel.setLayout(null);
 
-        //>>>>>>>>>>>>> CREATE SCENE >>>>>>>>>>>>
-        createPanel = new JPanel();
-        createPanel.setLayout(null);
-        createTitle = new JLabel("Enter the information to create an account");
-        createTitle.setBounds(10, 10, 300, 25);
-        createPanel.add(createTitle);
+createTitle = new JLabel("Enter the information to create an account");
+createTitle.setBounds(10, 10, 300, 25);
+createPanel.add(createTitle);
 
-        createNameLabel = new JLabel("Username: ");
-        createNameLabel.setBounds(10, 40, 80, 25);
-        createPanel.add(createNameLabel);
+createNameLabel = new JLabel("Name: ");
+createNameLabel.setBounds(10, 40, 80, 25);
+createPanel.add(createNameLabel);
 
-        createNameText = new JTextField();
-        createNameText.setBounds(100, 40, 165, 25);
-        createPanel.add(createNameText);
+createNameText = new JTextField();
+createNameText.setBounds(100, 40, 165, 25);
+createPanel.add(createNameText);
 
-        createPasswordLabel = new JLabel("Password: ");
-        createPasswordLabel.setBounds(10, 80, 80, 25);
-        createPanel.add(createPasswordLabel);
+createSurnameLabel = new JLabel("Surname: ");
+createSurnameLabel.setBounds(10, 70, 80, 25); // Ajustado para que no se superponga
+createPanel.add(createSurnameLabel);
 
-        createPasswordText = new JPasswordField();
-        createPasswordText.setBounds(100, 80, 165, 25);
-        createPanel.add(createPasswordText);
+createSurnameText = new JTextField();
+createSurnameText.setBounds(100, 70, 165, 25); // Ajustado
+createPanel.add(createSurnameText);
 
-        newCreateButton = new JButton("Create your Account");
-        newCreateButton.addActionListener(new GUI());
-        newCreateButton.setBounds(10, 110, 165,25);
-        createPanel.add(newCreateButton);
+createPasswordLabel = new JLabel("Password: ");
+createPasswordLabel.setBounds(10, 100, 80, 25); // Ajustado para que no se superponga
+createPanel.add(createPasswordLabel);
+
+createPasswordText = new JPasswordField();
+createPasswordText.setBounds(100, 100, 165, 25);
+createPanel.add(createPasswordText);
+
+newCreateButton = new JButton("Create your Account");
+newCreateButton.addActionListener(new GUI());
+newCreateButton.setBounds(10, 130, 165,25);
+createPanel.add(newCreateButton);
+
 
 
         frame.setVisible(true);
@@ -121,9 +136,10 @@ public class GUI implements ActionListener {
             case "Login":
                 String name = userText.getText();
                 String password = passwordText.getText();
+                String surname = surnameText.getText();
                 try {
                     String arg = "2";
-                    ProcessBuilder processBuilder = new ProcessBuilder("py", "GUI_login copy/src/main/resources/mainCopy.py", arg, name);
+                    ProcessBuilder processBuilder = new ProcessBuilder("py", "GUI_login copy/src/main/resources/mainCopy.py", arg, name, surname);
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
@@ -146,16 +162,41 @@ public class GUI implements ActionListener {
                 switchScene(frame, createPanel);
                 userText.setText("");
                 passwordText.setText("");
+                surnameText.setText("");
                 break;
             case "Create your Account":
                 System.out.println("creando cuenta");
                 String nombre = createNameText.getText();
                 String contrasena = createPasswordText.getText();
+                String apellido = createSurnameText.getText();
+                try {
+                    String arg = "1";
+                    ProcessBuilder processBuilder = new ProcessBuilder("py", "GUI_login copy/src/main/resources/mainCopy.py", arg, nombre, apellido);
+                    processBuilder.redirectErrorStream(true);
+                    Process process = processBuilder.start();
+                    try {
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            System.out.println(line);  // Print Python script output
+                        }
+                        int exitCode = process.waitFor();
+                        System.out.println("Python script finished with exit code: " + exitCode);
+                    }catch(IOException | InterruptedException exception){
+                        System.out.print("FALLAAA");
+                    }
+                }
+                catch(IOException exception){
+                    System.out.print("FALLAAA");
+                }                
                 if(nombre.isEmpty()){
                     createTitle.setText("Please enter a username");
                 }
                 else if (contrasena.isEmpty()) {
                     createTitle.setText("Please enter a password");
+                }
+                else if(apellido.isEmpty()){
+                    createTitle.setText("Please enter a surname");
                 }
                 else{
                     if(inputValidator.validateUsername(nombre)){
@@ -167,11 +208,12 @@ public class GUI implements ActionListener {
                             }
                         }
                         if(!found1){
-                            User user = new User(nombre, contrasena);
+                            User user = new User(nombre, contrasena, apellido);
                             users.add(user);
                             switchScene(frame, loginPanel);
                             createNameText.setText("");
                             createPasswordText.setText("");
+                            createSurnameText.setText("");
                             success.setText("Account created succesfully");
                         }
                         else{

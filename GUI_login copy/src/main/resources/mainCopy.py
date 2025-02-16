@@ -3,7 +3,7 @@ import sys
 
 eleccion = sys.argv[1]
 nombre = sys.argv[2]
-
+apellido = sys.argv[3]
 
 
 
@@ -31,7 +31,7 @@ cursor=conexion.cursor()
     
  
     
-def pushUsuario(nombre, apellido='surname', mail='noMail', edad=0, documento=0):
+def pushUsuario(nombre, apellido='noSurname', mail='noMail', edad=0, documento=0):
     sql = "INSERT INTO users (name, surname, email, age, dni) VALUES (%s, %s, %s, %s, %s)"
     cursor.execute(sql, (nombre, apellido, mail, int(edad), int(documento)))
     conexion.commit()  # Guardar los cambios en la BD
@@ -52,12 +52,14 @@ def pushUsuario(nombre, apellido='surname', mail='noMail', edad=0, documento=0):
 if eleccion == "1":
     
     # pushUsuario(nombre, apellido, mail, edad, documento) 
-    pushUsuario(nombre)
+    pushUsuario(nombre, apellido)
 elif eleccion == "2":
     cursor.execute(f"SELECT * FROM users where name = '{nombre}'")
     resultados = cursor.fetchall()
     if(resultados != []):
         print(True)
+    else:
+        print(False)
     #for fila in resultados:
         #print(fila)
 
