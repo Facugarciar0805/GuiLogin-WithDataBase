@@ -1,10 +1,10 @@
 import mysql.connector
 import sys
 
-eleccion = sys.argv[1]
-nombre = sys.argv[2]
-apellido = sys.argv[3]
-
+choice = sys.argv[1]
+name = sys.argv[2]
+surname = sys.argv[3]
+passwd = sys.argv[4]
 
 
 
@@ -21,19 +21,19 @@ cursor=conexion.cursor()
 
 
 # def ingresoUsuario():
-#      nombre = input("Ingrese su nombre: ")
-#      apellido = input("Ingrese su apellido: ")
+#      name = input("Ingrese su name: ")
+#      surname = input("Ingrese su surname: ")
 #      mail = input("Ingrese su mail: ")
 #      edad = input("Ingrese su edad: ")
 #      documento = input("Ingrese su DNI: ")
     
-#      return nombre, apellido, mail, edad, documento
+#      return name, surname, mail, edad, documento
     
  
     
-def pushUsuario(nombre, apellido='noSurname', mail='noMail', edad=0, documento=0):
-    sql = "INSERT INTO users (name, surname, email, age, dni) VALUES (%s, %s, %s, %s, %s)"
-    cursor.execute(sql, (nombre, apellido, mail, int(edad), int(documento)))
+def pushUsuario(name, passwd ,surname='nosurname', mail='noMail', edad=0, documento=0):
+    sql = "INSERT INTO users (name, surname, passwd, email, age, dni) VALUES (%s,%s, %s, %s, %s, %s)"
+    cursor.execute(sql, (name, surname, passwd, mail, int(edad), int(documento)))
     conexion.commit()  # Guardar los cambios en la BD
     print("Usuario agregado correctamente.")
 
@@ -41,7 +41,7 @@ def pushUsuario(nombre, apellido='noSurname', mail='noMail', edad=0, documento=0
 
     
 
-# eleccion = input("Que desea hacer: " '\n'
+# choice = input("Que desea hacer: " '\n'
 #                   "1-Ingresar un usuario nuevo"'\n'
 #                   "2-Ver los usuarios ingresados"'\n')
 
@@ -49,12 +49,12 @@ def pushUsuario(nombre, apellido='noSurname', mail='noMail', edad=0, documento=0
 
 
 
-if eleccion == "1":
+if choice == "1":
     
     # pushUsuario(nombre, apellido, mail, edad, documento) 
-    pushUsuario(nombre, apellido)
-elif eleccion == "2":
-    cursor.execute(f"SELECT * FROM users where name = '{nombre}'")
+    pushUsuario(name, passwd,surname)
+elif choice == "2":
+    cursor.execute(f"SELECT * FROM users where name = '{name}'")
     resultados = cursor.fetchall()
     if(resultados != []):
         print(True)

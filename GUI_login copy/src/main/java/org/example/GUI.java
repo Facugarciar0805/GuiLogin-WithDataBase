@@ -139,7 +139,7 @@ createPanel.add(newCreateButton);
                 String surname = surnameText.getText();
                 try {
                     String arg = "2";
-                    ProcessBuilder processBuilder = new ProcessBuilder("py", "GUI_login copy/src/main/resources/mainCopy.py", arg, name, surname);
+                    ProcessBuilder processBuilder = new ProcessBuilder("py", "GUI_login copy/src/main/resources/mainCopy.py", arg, name, surname, password);
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
@@ -171,7 +171,7 @@ createPanel.add(newCreateButton);
                 String apellido = createSurnameText.getText();
                 try {
                     String arg = "1";
-                    ProcessBuilder processBuilder = new ProcessBuilder("py", "GUI_login copy/src/main/resources/mainCopy.py", arg, nombre, apellido);
+                    ProcessBuilder processBuilder = new ProcessBuilder("py", "GUI_login copy/src/main/resources/mainCopy.py", arg, nombre, apellido, contrasena);
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
