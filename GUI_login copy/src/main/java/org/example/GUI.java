@@ -1,6 +1,5 @@
 package org.example;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -8,6 +7,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class GUI implements ActionListener {
 
@@ -123,7 +129,7 @@ public class GUI implements ActionListener {
                 String password = passwordText.getText();
                 try {
                     String arg = "2";
-                    ProcessBuilder processBuilder = new ProcessBuilder("py", "GUI_login copy/src/main/resources/mainCopy.py", arg, name);
+                    ProcessBuilder processBuilder = new ProcessBuilder("python3", "GUI_login copy/src/main/resources/mainCopy.py", arg, name);
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
@@ -135,7 +141,7 @@ public class GUI implements ActionListener {
                         int exitCode = process.waitFor();
                         System.out.println("Python script finished with exit code: " + exitCode);
                     }catch(IOException | InterruptedException exception){
-                        System.out.print("FALLAAA");
+                        System.out.print("FALLooo");
                     }
                 }
                 catch(IOException exception){

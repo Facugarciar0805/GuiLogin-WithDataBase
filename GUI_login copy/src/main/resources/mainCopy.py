@@ -58,8 +58,8 @@ elif eleccion == "2":
     resultados = cursor.fetchall()
     if(resultados != []):
         print(True)
-    #for fila in resultados:
-        #print(fila)
+    for fila in resultados:
+        print(fila)
 
 
 
