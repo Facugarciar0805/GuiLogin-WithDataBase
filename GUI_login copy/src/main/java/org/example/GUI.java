@@ -1,7 +1,13 @@
 package org.example;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+import javax.swing.border.LineBorder;
+
+import java.awt.Color;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +31,7 @@ public class GUI implements ActionListener {
     private static JPasswordField passwordText;
     private static JLabel surnameLabel;
     private static JTextField surnameText;
-    private static JButton loginButton;
+    private static  JButton loginButton;
     private static JButton createButton;
     private static JLabel success;
 
@@ -73,14 +79,50 @@ passwordText.setBounds(100,50,165,25);
 loginPanel.add(passwordText);
 
 loginButton = new JButton("Login");
-loginButton.setBounds(10,80,80,25);
+loginButton.setBounds(10, 80, 80, 25);
+loginButton.setForeground(Color.WHITE);
+loginButton.setBackground(new Color(30, 144, 255)); // Dodger blue
+loginButton.setFocusPainted(false);
+loginButton.setBorderPainted(false);
+loginButton.setContentAreaFilled(true);
+loginButton.setBorder(new LineBorder(new Color(30, 144, 255), 2, true)); // Bordes redondeados
+loginButton.setOpaque(true);
 loginPanel.add(loginButton);
 loginButton.addActionListener(new GUI());
+loginButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                loginButton.setBackground(new Color(0, 102, 204)); // Azul más oscuro
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                loginButton.setBackground(new Color(30, 144, 255)); // Azul original
+            }
+        });
 
 createButton = new JButton("Create Account");
 createButton.setBounds(100, 80, 120, 25);
+createButton.setForeground(Color.WHITE);
+createButton.setBackground(new Color(30, 144, 255)); // Dodger blue
+createButton.setFocusPainted(false);
+createButton.setBorderPainted(false);
+createButton.setContentAreaFilled(true);
+createButton.setBorder(new LineBorder(new Color(30, 144, 255), 2, true)); // Bordes redondeados
+createButton.setOpaque(true);
 loginPanel.add(createButton);
 createButton.addActionListener(new GUI());
+createButton.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        createButton.setBackground(new Color(0, 102, 204)); // Azul más oscuro
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        createButton.setBackground(new Color(30, 144, 255)); // Azul original
+    }
+});
 
 success = new JLabel("");
 success.setBounds(10,110,300,25);
@@ -119,9 +161,27 @@ createPasswordText.setBounds(100, 100, 165, 25);
 createPanel.add(createPasswordText);
 
 newCreateButton = new JButton("Create your Account");
-newCreateButton.addActionListener(new GUI());
 newCreateButton.setBounds(10, 130, 165,25);
+newCreateButton.setForeground(Color.WHITE);
+newCreateButton.setBackground(new Color(30, 144, 255)); // Dodger blue
+newCreateButton.setFocusPainted(false);
+newCreateButton.setBorderPainted(false);
+newCreateButton.setContentAreaFilled(true);
+newCreateButton.setBorder(new LineBorder(new Color(30, 144, 255), 2, true)); // Bordes redondeados
+newCreateButton.setOpaque(true);
 createPanel.add(newCreateButton);
+newCreateButton.addActionListener(new GUI());
+newCreateButton.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        newCreateButton.setBackground(new Color(0, 102, 204)); // Azul más oscuro
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        newCreateButton.setBackground(new Color(30, 144, 255)); // Azul original
+    }
+});
 
 
 
@@ -247,28 +307,3 @@ createPanel.add(newCreateButton);
     }
 }
 
-//try {
-//String arg = "Hello world!";
-// Define the command to run the Python script
-//ProcessBuilder processBuilder = new ProcessBuilder("python3", "src/main/resources/Python/intento.py", arg);
-          //  processBuilder.redirectErrorStream(true);  // Merge error and output streams
-
-// Start the process
-//Process process = processBuilder.start();
-
-// Read the output of the Python script
-           // try (
-//BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-//String line;
-              //  while ((line = reader.readLine()) != null) {
-       // System.out.println(line);  // Print Python script output
-             //   }
-                    //    }
-
-// Wait for the process to finish
-//int exitCode = process.waitFor();
-            //System.out.println("Python script finished with exit code: " + exitCode);
-
-      //  } catch (IOException | InterruptedException e) {
-       // e.printStackTrace();
-       // }
