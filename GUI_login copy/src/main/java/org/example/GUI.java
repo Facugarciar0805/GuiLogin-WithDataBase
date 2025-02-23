@@ -173,7 +173,7 @@ createPanel.add(newCreateButton);
                 surname = createSurnameText.getText();
                 try {
                     String arg = "1";
-                    ProcessBuilder processBuilder = new ProcessBuilder("py", "GUI_login copy/src/main/resources/mainCopy.py", arg, name, surname, password);
+                    ProcessBuilder processBuilder = new ProcessBuilder("python3", "GUI_login copy/src/main/resources/mainCopy.py", arg, name, surname, password);
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
@@ -189,7 +189,7 @@ createPanel.add(newCreateButton);
                     }
                 }
                 catch(IOException exception){
-                    System.out.print("FALLAAA");
+                    System.out.print("FALLooo");
                 }                
                 if(name.isEmpty()){
                     createTitle.setText("Please enter a username");
