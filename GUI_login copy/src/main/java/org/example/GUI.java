@@ -131,7 +131,14 @@ createPanel.add(newCreateButton);
     @Override
     public void actionPerformed(ActionEvent e) {
 
+
+        String os = System.getProperty("os.name").toLowerCase();
         String pythonString = "python3";
+        if(os.contains("win")){
+            pythonString = "py";
+        }else if(os.contains("mac")){
+            pythonString = "python3";
+        }
         
         String name;
         String password;
