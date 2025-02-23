@@ -130,10 +130,13 @@ createPanel.add(newCreateButton);
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        String pythonString = "python3";
+        
         String name;
         String password;
         String surname;
-
+        
         String command = e.getActionCommand();
         switch (command){
             case "Login":
@@ -141,7 +144,7 @@ createPanel.add(newCreateButton);
                 password = passwordText.getText();
                 try {
                     String arg = "2";
-                    ProcessBuilder processBuilder = new ProcessBuilder("python3", "GUI_login copy/src/main/resources/mainCopy.py", arg, name, "No hace falta", password);
+                    ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, name, "No hace falta", password);
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
@@ -173,7 +176,7 @@ createPanel.add(newCreateButton);
                 surname = createSurnameText.getText();
                 try {
                     String arg = "1";
-                    ProcessBuilder processBuilder = new ProcessBuilder("python3", "GUI_login copy/src/main/resources/mainCopy.py", arg, name, surname, password);
+                    ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, name, surname, password);
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
