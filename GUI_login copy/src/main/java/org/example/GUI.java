@@ -130,16 +130,18 @@ createPanel.add(newCreateButton);
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String name;
+        String password;
+        String surname;
 
         String command = e.getActionCommand();
         switch (command){
             case "Login":
-                String name = userText.getText();
-                String password = passwordText.getText();
-                String surname = surnameText.getText();
+                name = userText.getText();
+                password = passwordText.getText();
                 try {
                     String arg = "2";
-                    ProcessBuilder processBuilder = new ProcessBuilder("py", "GUI_login copy/src/main/resources/mainCopy.py", arg, name, surname, password);
+                    ProcessBuilder processBuilder = new ProcessBuilder("python3", "GUI_login copy/src/main/resources/mainCopy.py", arg, name, "No hace falta", password);
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
@@ -166,12 +168,12 @@ createPanel.add(newCreateButton);
                 break;
             case "Create your Account":
                 System.out.println("creando cuenta");
-                String nombre = createNameText.getText();
-                String contrasena = createPasswordText.getText();
-                String apellido = createSurnameText.getText();
+                name = createNameText.getText();
+                password = createPasswordText.getText();
+                surname = createSurnameText.getText();
                 try {
                     String arg = "1";
-                    ProcessBuilder processBuilder = new ProcessBuilder("py", "GUI_login copy/src/main/resources/mainCopy.py", arg, nombre, apellido, contrasena);
+                    ProcessBuilder processBuilder = new ProcessBuilder("py", "GUI_login copy/src/main/resources/mainCopy.py", arg, name, surname, password);
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
@@ -189,26 +191,26 @@ createPanel.add(newCreateButton);
                 catch(IOException exception){
                     System.out.print("FALLAAA");
                 }                
-                if(nombre.isEmpty()){
+                if(name.isEmpty()){
                     createTitle.setText("Please enter a username");
                 }
-                else if (contrasena.isEmpty()) {
+                else if (password.isEmpty()) {
                     createTitle.setText("Please enter a password");
                 }
-                else if(apellido.isEmpty()){
+                else if(surname.isEmpty()){
                     createTitle.setText("Please enter a surname");
                 }
                 else{
-                    if(inputValidator.validateUsername(nombre)){
+                    if(inputValidator.validateUsername(name)){
                         boolean found1 = false;
                         for(User u: users){
-                            if(u.getName().equals(nombre)){
+                            if(u.getName().equals(name)){
                                 found1 = true;
                                 break;
                             }
                         }
                         if(!found1){
-                            User user = new User(nombre, contrasena, apellido);
+                            User user = new User(name, password, surname);
                             users.add(user);
                             switchScene(frame, loginPanel);
                             createNameText.setText("");
