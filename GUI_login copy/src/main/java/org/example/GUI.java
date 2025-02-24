@@ -268,6 +268,7 @@ newCreateButton.addMouseListener(new MouseAdapter() {
                         break;
                     }
                 
+            
                 try {
                     String arg = "1";
                     ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, name, surname, password);
@@ -287,36 +288,17 @@ newCreateButton.addMouseListener(new MouseAdapter() {
                 }
                 catch(IOException exception){
                     System.out.print("FALLooo");
-                }                
+                }
+
                 
-                // else{
-                //     if(inputValidator.validateUsername(name)){
-                //         boolean found1 = false;
-                //         for(User u: users){
-                //             if(u.getName().equals(name)){
-                //                 found1 = true;
-                //                 break;
-                //             }
-                //         }
-                //         if(!found1){
-                //             User user = new User(name, password, surname);
-                //             users.add(user);
-                //             switchScene(frame, loginPanel);
-                //             createNameText.setText("");
-                //             createPasswordText.setText("");
-                //             createSurnameText.setText("");
-                //             success.setText("Account created succesfully");
-                //         }
-                //         else{
-                //             createTitle.setText("That username is taken");
-                //         }
-                //     }
-                //     else{
-                //         createTitle.setText("That username is invalid");
-
-                //     }
-                // }
-
+                switchScene(frame, loginPanel);
+                createNameText.setText("");
+                createPasswordText.setText("");
+                createSurnameText.setText("");
+                success.setText("Account created succesfully");
+                    
+                        
+                
 
                 break;
             default:
