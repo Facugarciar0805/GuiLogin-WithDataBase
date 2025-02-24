@@ -246,8 +246,7 @@ newCreateButton.addMouseListener(new MouseAdapter() {
                 break;
             case "Create your Account":
                 System.out.println("creando cuenta");
-                //boolean seguir = true;
-                //while(seguir){
+            
                     name = createNameText.getText();
                     password = createPasswordText.getText();
                     surname = createSurnameText.getText();
@@ -259,11 +258,15 @@ newCreateButton.addMouseListener(new MouseAdapter() {
                         createTitle.setText("Please enter a password");
                         break;
                     }
+                    else if(!inputValidator.validatePassword(password)){
+                        createTitle.setText("Enter a strong password");
+                        break;
+                    }
                     else if(surname.isEmpty()){
                         createTitle.setText("Please enter a surname");
                         break;
                     }
-                //}
+                
                 try {
                     String arg = "1";
                     ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, name, surname, password);
@@ -284,15 +287,7 @@ newCreateButton.addMouseListener(new MouseAdapter() {
                 catch(IOException exception){
                     System.out.print("FALLooo");
                 }                
-                // if(name.isEmpty()){
-                //     createTitle.setText("Please enter a username");
-                // }
-                // else if (password.isEmpty()) {
-                //     createTitle.setText("Please enter a password");
-                // }
-                // else if(surname.isEmpty()){
-                //     createTitle.setText("Please enter a surname");
-                // }
+                
                 // else{
                 //     if(inputValidator.validateUsername(name)){
                 //         boolean found1 = false;
