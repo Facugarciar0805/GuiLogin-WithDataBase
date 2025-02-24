@@ -30,7 +30,19 @@ elif choice == "2":
         print(True)
     else:
         print(False)
+    #for fila in resultados:
+        #print(fila)
 
 
+
+
+
+
+
+
+
+
+
+# Cerrar el cursor y la conexión
 cursor.close()
 conexion.close()

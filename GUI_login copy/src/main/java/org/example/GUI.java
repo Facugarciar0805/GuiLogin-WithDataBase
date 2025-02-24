@@ -213,13 +213,17 @@ newCreateButton.addMouseListener(new MouseAdapter() {
                     success.setText("Please enter a username");
                     break;
                 }
-                else if (password.isEmpty()) {
-                    success.setText("Please enter a password");
-                    break;
-                }
+                // else if (password.isEmpty()) {
+                //     success.setText("Please enter a password");
+                //     break;
+                // }
                 try {
                     String arg = "2";
+<<<<<<< Updated upstream
                     ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, name, "No hace falta", password);
+=======
+                    ProcessBuilder processBuilder = new ProcessBuilder("py", "GUI_login copy/src/main/resources/mainCopy.py", arg, name, "No hace falta", password);
+>>>>>>> Stashed changes
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
@@ -234,6 +238,7 @@ newCreateButton.addMouseListener(new MouseAdapter() {
                         System.out.print("FALLAAA");
                     }
                 }
+
                 catch(IOException exception){
                     System.out.print("FALLAAA");
                 }
