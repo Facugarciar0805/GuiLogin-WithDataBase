@@ -24,12 +24,16 @@ def pushUsuario(name, passwd ,surname='nosurname', mail='noMail', edad=0, docume
 if choice == "1":
     pushUsuario(name, passwd,surname)
 elif choice == "2":
-    cursor.execute(f"SELECT * FROM users where name = '{name}'")
-    resultados = cursor.fetchall()
-    if(resultados != []):
-        print(True)
+    cursor.execute("SELECT user_id FROM users WHERE name = %s", (name,))
+    user_id = cursor.fetchone()
+    user_id = user_id[0]
+    cursor.execute("SELECT passwd FROM users WHERE user_id = %s", (user_id,))
+    passwdDb = cursor.fetchone()
+    passwdDb = passwdDb[0]
+    if(passwdDb == passwd ):
+        print("Correcto")
     else:
-        print(False)
+        print("Contraseña incorrecta")
     #for fila in resultados:
         #print(fila)
 
