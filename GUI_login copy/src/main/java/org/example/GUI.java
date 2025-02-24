@@ -210,11 +210,11 @@ newCreateButton.addMouseListener(new MouseAdapter() {
                 name = userText.getText();
                 password = passwordText.getText();
                 if(name.isEmpty()){
-                    createTitle.setText("Please enter a username");
+                    success.setText("Please enter a username");
                     break;
                 }
                 else if (password.isEmpty()) {
-                    createTitle.setText("Please enter a password");
+                    success.setText("Please enter a password");
                     break;
                 }
                 try {
