@@ -22,7 +22,6 @@ def pushUsuario(name, passwd ,surname='nosurname', mail='noMail', edad=0, docume
 
 
 if choice == "1":
-    
     pushUsuario(name, passwd,surname)
 elif choice == "2":
     cursor.execute(f"SELECT * FROM users where name = '{name}'")

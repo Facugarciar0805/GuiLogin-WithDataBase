@@ -209,6 +209,14 @@ newCreateButton.addMouseListener(new MouseAdapter() {
             case "Login":
                 name = userText.getText();
                 password = passwordText.getText();
+                if(name.isEmpty()){
+                    createTitle.setText("Please enter a username");
+                    break;
+                }
+                else if (password.isEmpty()) {
+                    createTitle.setText("Please enter a password");
+                    break;
+                }
                 try {
                     String arg = "2";
                     ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, name, "No hace falta", password);
@@ -238,9 +246,24 @@ newCreateButton.addMouseListener(new MouseAdapter() {
                 break;
             case "Create your Account":
                 System.out.println("creando cuenta");
-                name = createNameText.getText();
-                password = createPasswordText.getText();
-                surname = createSurnameText.getText();
+                //boolean seguir = true;
+                //while(seguir){
+                    name = createNameText.getText();
+                    password = createPasswordText.getText();
+                    surname = createSurnameText.getText();
+                    if(name.isEmpty()){
+                        createTitle.setText("Please enter a username");
+                        break;
+                    }
+                    else if (password.isEmpty()) {
+                        createTitle.setText("Please enter a password");
+                        break;
+                    }
+                    else if(surname.isEmpty()){
+                        createTitle.setText("Please enter a surname");
+                        break;
+                    }
+                //}
                 try {
                     String arg = "1";
                     ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, name, surname, password);
@@ -261,42 +284,42 @@ newCreateButton.addMouseListener(new MouseAdapter() {
                 catch(IOException exception){
                     System.out.print("FALLooo");
                 }                
-                if(name.isEmpty()){
-                    createTitle.setText("Please enter a username");
-                }
-                else if (password.isEmpty()) {
-                    createTitle.setText("Please enter a password");
-                }
-                else if(surname.isEmpty()){
-                    createTitle.setText("Please enter a surname");
-                }
-                else{
-                    if(inputValidator.validateUsername(name)){
-                        boolean found1 = false;
-                        for(User u: users){
-                            if(u.getName().equals(name)){
-                                found1 = true;
-                                break;
-                            }
-                        }
-                        if(!found1){
-                            User user = new User(name, password, surname);
-                            users.add(user);
-                            switchScene(frame, loginPanel);
-                            createNameText.setText("");
-                            createPasswordText.setText("");
-                            createSurnameText.setText("");
-                            success.setText("Account created succesfully");
-                        }
-                        else{
-                            createTitle.setText("That username is taken");
-                        }
-                    }
-                    else{
-                        createTitle.setText("That username is invalid");
+                // if(name.isEmpty()){
+                //     createTitle.setText("Please enter a username");
+                // }
+                // else if (password.isEmpty()) {
+                //     createTitle.setText("Please enter a password");
+                // }
+                // else if(surname.isEmpty()){
+                //     createTitle.setText("Please enter a surname");
+                // }
+                // else{
+                //     if(inputValidator.validateUsername(name)){
+                //         boolean found1 = false;
+                //         for(User u: users){
+                //             if(u.getName().equals(name)){
+                //                 found1 = true;
+                //                 break;
+                //             }
+                //         }
+                //         if(!found1){
+                //             User user = new User(name, password, surname);
+                //             users.add(user);
+                //             switchScene(frame, loginPanel);
+                //             createNameText.setText("");
+                //             createPasswordText.setText("");
+                //             createSurnameText.setText("");
+                //             success.setText("Account created succesfully");
+                //         }
+                //         else{
+                //             createTitle.setText("That username is taken");
+                //         }
+                //     }
+                //     else{
+                //         createTitle.setText("That username is invalid");
 
-                    }
-                }
+                //     }
+                // }
 
 
                 break;
