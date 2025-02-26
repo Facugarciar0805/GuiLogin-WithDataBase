@@ -42,7 +42,7 @@ elif choice == "2":
 
 
 
-
+cursor.fetchall()
 # Cerrar el cursor y la conexión
 cursor.close()
 conexion.close()
