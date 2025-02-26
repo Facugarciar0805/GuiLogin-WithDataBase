@@ -30,8 +30,8 @@ public class GUI implements ActionListener {
     private static JLabel passwordLabel;
     private static JPasswordField passwordText;
     private static JTextField surnameText;
-    private static  JButton loginButton;
-    private static JButton createButton;
+    private static Button loginButton;
+    private static Button createButton;
     private static JLabel success;
 
     //create scene
@@ -45,7 +45,7 @@ public class GUI implements ActionListener {
     private static JTextField createPasswordText;
     private static JTextField createSurnameText;
     private static JLabel createTitle;
-    private static JButton newCreateButton;
+    private static Button newCreateButton;
 
 
     private static List<User> users = new ArrayList<>();
@@ -79,51 +79,13 @@ passwordText = new JPasswordField();
 passwordText.setBounds(100,50,165,25);
 loginPanel.add(passwordText);
 
-loginButton = new JButton("Login");
-loginButton.setBounds(10, 80, 80, 25);
-loginButton.setForeground(Color.WHITE);
-loginButton.setBackground(new Color(30, 144, 255)); // Dodger blue
-loginButton.setFocusPainted(false);
-loginButton.setBorderPainted(false);
-loginButton.setContentAreaFilled(true);
-loginButton.setBorder(new LineBorder(new Color(30, 144, 255), 2, true)); // Bordes redondeados
-loginButton.setOpaque(true);
-loginPanel.add(loginButton);
-loginButton.addActionListener(new GUI());
-loginButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                loginButton.setBackground(new Color(0, 102, 204)); // Azul más oscuro
-            }
+loginButton = new Button("Login", 10, 80, 80, 25);
+loginPanel.add(loginButton.button);
+loginButton.addListener(new GUI());
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-                loginButton.setBackground(new Color(30, 144, 255)); // Azul original
-            }
-        });
-
-createButton = new JButton("Create Account");
-createButton.setBounds(100, 80, 120, 25);
-createButton.setForeground(Color.WHITE);
-createButton.setBackground(new Color(30, 144, 255)); // Dodger blue
-createButton.setFocusPainted(false);
-createButton.setBorderPainted(false);
-createButton.setContentAreaFilled(true);
-createButton.setBorder(new LineBorder(new Color(30, 144, 255), 2, true)); // Bordes redondeados
-createButton.setOpaque(true);
-loginPanel.add(createButton);
-createButton.addActionListener(new GUI());
-createButton.addMouseListener(new MouseAdapter() {
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        createButton.setBackground(new Color(0, 102, 204)); // Azul más oscuro
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        createButton.setBackground(new Color(30, 144, 255)); // Azul original
-    }
-});
+createButton = new Button("Create Account", 100, 80, 120, 25);
+loginPanel.add(createButton.button);
+createButton.addListener(new GUI());
 
 success = new JLabel("");
 success.setBounds(10,110,300,25);
@@ -169,28 +131,11 @@ createPasswordText = new JPasswordField();
 createPasswordText.setBounds(100, 130, 165, 25);
 createPanel.add(createPasswordText);
 
-newCreateButton = new JButton("Create your Account");
-newCreateButton.setBounds(10, 160, 165,25);
-newCreateButton.setForeground(Color.WHITE);
-newCreateButton.setBackground(new Color(30, 144, 255)); // Dodger blue
-newCreateButton.setFocusPainted(false);
-newCreateButton.setBorderPainted(false);
-newCreateButton.setContentAreaFilled(true);
-newCreateButton.setBorder(new LineBorder(new Color(30, 144, 255), 2, true)); // Bordes redondeados
-newCreateButton.setOpaque(true);
-createPanel.add(newCreateButton);
-newCreateButton.addActionListener(new GUI());
-newCreateButton.addMouseListener(new MouseAdapter() {
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        newCreateButton.setBackground(new Color(0, 102, 204)); // Azul más oscuro
-    }
+newCreateButton = new Button("Create your Account", 10, 160, 165, 25);
+createPanel.add(newCreateButton.button);
+newCreateButton.addListener(new GUI());
 
-    @Override
-    public void mouseExited(MouseEvent e) {
-        newCreateButton.setBackground(new Color(30, 144, 255)); // Azul original
-    }
-});
+
 
 
 
@@ -215,6 +160,7 @@ newCreateButton.addMouseListener(new MouseAdapter() {
         String dni;
         
         String command = e.getActionCommand();
+        System.out.println(command);
         switch (command){
             case "Login":
                 dni = userText.getText();
@@ -248,6 +194,7 @@ newCreateButton.addMouseListener(new MouseAdapter() {
                 catch(IOException exception){
                     System.out.print("FALLAAA");
                 }
+                success.setText("Usuario ingresado correctamente");
                 break;
             case "Create Account":
                 switchScene(frame, createPanel);
