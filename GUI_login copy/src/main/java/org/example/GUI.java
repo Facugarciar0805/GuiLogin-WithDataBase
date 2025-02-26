@@ -29,7 +29,6 @@ public class GUI implements ActionListener {
     private static JTextField userText;
     private static JLabel passwordLabel;
     private static JPasswordField passwordText;
-    private static JLabel surnameLabel;
     private static JTextField surnameText;
     private static  JButton loginButton;
     private static JButton createButton;
@@ -37,9 +36,11 @@ public class GUI implements ActionListener {
 
     //create scene
     private static JPanel createPanel;
+    private static JLabel createDniLabel;
     private static JLabel createNameLabel;
     private static JLabel createPasswordLabel;
     private static JLabel createSurnameLabel;
+    private static JTextField createDniText;
     private static JTextField createNameText;
     private static JTextField createPasswordText;
     private static JTextField createSurnameText;
@@ -62,7 +63,7 @@ frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 frame.add(loginPanel);
 loginPanel.setLayout(null);
 
-userLabel = new JLabel("User: ");
+userLabel = new JLabel("DNI: ");
 userLabel.setBounds(10,20,80,25);
 loginPanel.add(userLabel);
 
@@ -136,32 +137,40 @@ createTitle = new JLabel("Enter the information to create an account");
 createTitle.setBounds(10, 10, 300, 25);
 createPanel.add(createTitle);
 
+createDniLabel = new JLabel("DNI: ");
+createDniLabel.setBounds(10,40,80,25);
+createPanel.add(createDniLabel);
+
+createDniText = new JTextField();
+createDniText.setBounds(100, 40, 165, 25);
+createPanel.add(createDniText);
+
 createNameLabel = new JLabel("Name: ");
-createNameLabel.setBounds(10, 40, 80, 25);
+createNameLabel.setBounds(10, 70, 80, 25);
 createPanel.add(createNameLabel);
 
 createNameText = new JTextField();
-createNameText.setBounds(100, 40, 165, 25);
+createNameText.setBounds(100, 70, 165, 25);
 createPanel.add(createNameText);
 
 createSurnameLabel = new JLabel("Surname: ");
-createSurnameLabel.setBounds(10, 70, 80, 25); // Ajustado para que no se superponga
+createSurnameLabel.setBounds(10, 100, 80, 25); // Ajustado para que no se superponga
 createPanel.add(createSurnameLabel);
 
 createSurnameText = new JTextField();
-createSurnameText.setBounds(100, 70, 165, 25); // Ajustado
+createSurnameText.setBounds(100, 100, 165, 25); // Ajustado
 createPanel.add(createSurnameText);
 
 createPasswordLabel = new JLabel("Password: ");
-createPasswordLabel.setBounds(10, 100, 80, 25); // Ajustado para que no se superponga
+createPasswordLabel.setBounds(10, 130, 80, 25); // Ajustado para que no se superponga
 createPanel.add(createPasswordLabel);
 
 createPasswordText = new JPasswordField();
-createPasswordText.setBounds(100, 100, 165, 25);
+createPasswordText.setBounds(100, 130, 165, 25);
 createPanel.add(createPasswordText);
 
 newCreateButton = new JButton("Create your Account");
-newCreateButton.setBounds(10, 130, 165,25);
+newCreateButton.setBounds(10, 160, 165,25);
 newCreateButton.setForeground(Color.WHITE);
 newCreateButton.setBackground(new Color(30, 144, 255)); // Dodger blue
 newCreateButton.setFocusPainted(false);
@@ -203,13 +212,14 @@ newCreateButton.addMouseListener(new MouseAdapter() {
         String name;
         String password;
         String surname;
+        String dni;
         
         String command = e.getActionCommand();
         switch (command){
             case "Login":
-                name = userText.getText();
+                dni = userText.getText();
                 password = passwordText.getText();
-                if(name.isEmpty()){
+                if(dni.isEmpty()){
                     success.setText("Please enter a username");
                     break;
                 }
@@ -219,7 +229,7 @@ newCreateButton.addMouseListener(new MouseAdapter() {
                 // }
                 try {
                     String arg = "2";
-                    ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, name, "No hace falta", password);
+                    ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, dni, "No hace falta", "No hace falta", password);
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
@@ -247,11 +257,14 @@ newCreateButton.addMouseListener(new MouseAdapter() {
                 break;
             case "Create your Account":
                 System.out.println("creando cuenta");
-            
+                    dni = createDniText.getText();
                     name = createNameText.getText();
                     password = createPasswordText.getText();
                     surname = createSurnameText.getText();
-                    if(name.isEmpty()){
+                    if(dni.isEmpty()){
+                        createTitle.setText("Please enter a DNI");
+                    }
+                    else if(name.isEmpty()){
                         createTitle.setText("Please enter a username");
                         break;
                     }
@@ -271,7 +284,7 @@ newCreateButton.addMouseListener(new MouseAdapter() {
             
                 try {
                     String arg = "1";
-                    ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, name, surname, password);
+                    ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, dni, name, surname, password);
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
@@ -292,13 +305,12 @@ newCreateButton.addMouseListener(new MouseAdapter() {
 
                 
                 switchScene(frame, loginPanel);
+                createDniText.setText("");
                 createNameText.setText("");
                 createPasswordText.setText("");
                 createSurnameText.setText("");
                 success.setText("Account created succesfully");
                     
-                        
-                
 
                 break;
             default:
