@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Items;
 
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;

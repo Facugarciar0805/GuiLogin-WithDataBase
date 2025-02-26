@@ -1,14 +1,12 @@
 package org.example;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
-import javax.swing.border.LineBorder;
 
-import java.awt.Color;
-import java.awt.TextField;
+import org.example.Items.Button;
+import org.example.Items.CreateScene;
+import org.example.Items.LoginScene;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -22,30 +20,32 @@ public class GUI implements ActionListener {
     private static Menu menu;
 
     private static JFrame frame;
-    private static JPanel loginPanel;
+    //private static JPanel loginPanel;
 
     //login scene
-    private static JLabel userLabel;
-    private static JTextField userText;
-    private static JLabel passwordLabel;
-    private static JPasswordField passwordText;
-    private static JTextField surnameText;
-    private static Button loginButton;
-    private static Button createButton;
-    private static JLabel success;
+    private static LoginScene loginScene;
+    // private static JLabel userLabel;
+    // private static JTextField userText;
+    // private static JLabel passwordLabel;
+    // private static JPasswordField passwordText;
+    // private static JTextField surnameText;
+    // private static Button loginButton;
+    // private static Button createButton;
+    // private static JLabel success;
 
     //create scene
-    private static JPanel createPanel;
-    private static JLabel createDniLabel;
-    private static JLabel createNameLabel;
-    private static JLabel createPasswordLabel;
-    private static JLabel createSurnameLabel;
-    private static JTextField createDniText;
-    private static JTextField createNameText;
-    private static JTextField createPasswordText;
-    private static JTextField createSurnameText;
-    private static JLabel createTitle;
-    private static Button newCreateButton;
+    private static CreateScene createScene;
+    // private static JPanel createPanel;
+    // private static JLabel createDniLabel;
+    // private static JLabel createNameLabel;
+    // private static JLabel createPasswordLabel;
+    // private static JLabel createSurnameLabel;
+    // private static JTextField createDniText;
+    // private static JTextField createNameText;
+    // private static JTextField createPasswordText;
+    // private static JTextField createSurnameText;
+    // private static JLabel createTitle;
+    // private static Button newCreateButton;
 
 
     private static List<User> users = new ArrayList<>();
@@ -54,90 +54,21 @@ public class GUI implements ActionListener {
     public static void main(String[] args) {
 
         menu = new Menu();
+        loginScene = new LoginScene();
+        
+        frame = new JFrame();
+        frame.setSize(500,350);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        
         //>>>>>>>>>> LOGIN SCENE  >>>>>>>>>>
-frame = new JFrame();
-loginPanel = new JPanel();
-frame.setSize(500,350);
-frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-frame.add(loginPanel);
-loginPanel.setLayout(null);
 
-userLabel = new JLabel("DNI: ");
-userLabel.setBounds(10,20,80,25);
-loginPanel.add(userLabel);
-
-userText = new JTextField();
-userText.setBounds(100,20,165,25);
-loginPanel.add(userText);
-
-passwordLabel = new JLabel("Password: ");
-passwordLabel.setBounds(10,50,80,20);
-loginPanel.add(passwordLabel);
-
-passwordText = new JPasswordField();
-passwordText.setBounds(100,50,165,25);
-loginPanel.add(passwordText);
-
-loginButton = new Button("Login", 10, 80, 80, 25);
-loginPanel.add(loginButton.button);
-loginButton.addListener(new GUI());
-
-createButton = new Button("Create Account", 100, 80, 120, 25);
-loginPanel.add(createButton.button);
-createButton.addListener(new GUI());
-
-success = new JLabel("");
-success.setBounds(10,110,300,25);
-loginPanel.add(success);
-
-//>>>>>>>>>>>>> CREATE SCENE >>>>>>>>>>>>
-createPanel = new JPanel();
-createPanel.setLayout(null);
-
-createTitle = new JLabel("Enter the information to create an account");
-createTitle.setBounds(10, 10, 300, 25);
-createPanel.add(createTitle);
-
-createDniLabel = new JLabel("DNI: ");
-createDniLabel.setBounds(10,40,80,25);
-createPanel.add(createDniLabel);
-
-createDniText = new JTextField();
-createDniText.setBounds(100, 40, 165, 25);
-createPanel.add(createDniText);
-
-createNameLabel = new JLabel("Name: ");
-createNameLabel.setBounds(10, 70, 80, 25);
-createPanel.add(createNameLabel);
-
-createNameText = new JTextField();
-createNameText.setBounds(100, 70, 165, 25);
-createPanel.add(createNameText);
-
-createSurnameLabel = new JLabel("Surname: ");
-createSurnameLabel.setBounds(10, 100, 80, 25); // Ajustado para que no se superponga
-createPanel.add(createSurnameLabel);
-
-createSurnameText = new JTextField();
-createSurnameText.setBounds(100, 100, 165, 25); // Ajustado
-createPanel.add(createSurnameText);
-
-createPasswordLabel = new JLabel("Password: ");
-createPasswordLabel.setBounds(10, 130, 80, 25); // Ajustado para que no se superponga
-createPanel.add(createPasswordLabel);
-
-createPasswordText = new JPasswordField();
-createPasswordText.setBounds(100, 130, 165, 25);
-createPanel.add(createPasswordText);
-
-newCreateButton = new Button("Create your Account", 10, 160, 165, 25);
-createPanel.add(newCreateButton.button);
-newCreateButton.addListener(new GUI());
+        frame.add(loginScene.loginPanel);
 
 
-
-
+        //>>>>>>>>>>>>> CREATE SCENE >>>>>>>>>>>>
+        createScene = new CreateScene();
+        
 
         frame.setVisible(true);
     }
@@ -163,16 +94,12 @@ newCreateButton.addListener(new GUI());
         System.out.println(command);
         switch (command){
             case "Login":
-                dni = userText.getText();
-                password = passwordText.getText();
+                dni = loginScene.userText.getText();
+                password = loginScene.passwordText.getText();
                 if(dni.isEmpty()){
-                    success.setText("Please enter a username");
+                    loginScene.success.setText("Please enter a username");
                     break;
                 }
-                // else if (password.isEmpty()) {
-                //     success.setText("Please enter a password");
-                //     break;
-                // }
                 try {
                     String arg = "2";
                     ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, dni, "No hace falta", "No hace falta", password);
@@ -194,37 +121,38 @@ newCreateButton.addListener(new GUI());
                 catch(IOException exception){
                     System.out.print("FALLAAA");
                 }
-                success.setText("Usuario ingresado correctamente");
+                loginScene.success.setText("Usuario ingresado correctamente");
                 break;
             case "Create Account":
-                switchScene(frame, createPanel);
-                userText.setText("");
-                passwordText.setText("");
-                surnameText.setText("");
+                switchScene(frame, createScene.createPanel);
+                loginScene.userText.setText("");
+                loginScene.passwordText.setText("");
+                loginScene.surnameText.setText("");
                 break;
             case "Create your Account":
                 System.out.println("creando cuenta");
-                    dni = createDniText.getText();
-                    name = createNameText.getText();
-                    password = createPasswordText.getText();
-                    surname = createSurnameText.getText();
+                    dni = createScene.createDniText.getText();
+                    name = createScene.createNameText.getText();
+                    password = createScene.createPasswordText.getText();
+                    surname = createScene.createSurnameText.getText();
                     if(dni.isEmpty()){
-                        createTitle.setText("Please enter a DNI");
+                        createScene.createTitle.setText("Please enter a DNI");
+                        break;
                     }
                     else if(name.isEmpty()){
-                        createTitle.setText("Please enter a username");
+                        createScene.createTitle.setText("Please enter a username");
                         break;
                     }
                     else if (password.isEmpty()) {
-                        createTitle.setText("Please enter a password");
+                        createScene.createTitle.setText("Please enter a password");
                         break;
                     }
                     else if(!inputValidator.validatePassword(password)){
-                        createTitle.setText("Enter a strong password");
+                        createScene.createTitle.setText("Enter a strong password");
                         break;
                     }
                     else if(surname.isEmpty()){
-                        createTitle.setText("Please enter a surname");
+                        createScene.createTitle.setText("Please enter a surname");
                         break;
                     }
                 
@@ -251,12 +179,12 @@ newCreateButton.addListener(new GUI());
                 }
 
                 
-                switchScene(frame, loginPanel);
-                createDniText.setText("");
-                createNameText.setText("");
-                createPasswordText.setText("");
-                createSurnameText.setText("");
-                success.setText("Account created succesfully");
+                switchScene(frame, loginScene.loginPanel);
+                createScene.createDniText.setText("");
+                createScene.createNameText.setText("");
+                createScene.createPasswordText.setText("");
+                createScene.createSurnameText.setText("");
+                loginScene.success.setText("Account created succesfully");
                     
 
                 break;
