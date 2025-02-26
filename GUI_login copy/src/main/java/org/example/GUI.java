@@ -20,35 +20,13 @@ public class GUI implements ActionListener {
     private static Menu menu;
 
     private static JFrame frame;
-    //private static JPanel loginPanel;
 
     //login scene
     private static LoginScene loginScene;
-    // private static JLabel userLabel;
-    // private static JTextField userText;
-    // private static JLabel passwordLabel;
-    // private static JPasswordField passwordText;
-    // private static JTextField surnameText;
-    // private static Button loginButton;
-    // private static Button createButton;
-    // private static JLabel success;
 
     //create scene
     private static CreateScene createScene;
-    // private static JPanel createPanel;
-    // private static JLabel createDniLabel;
-    // private static JLabel createNameLabel;
-    // private static JLabel createPasswordLabel;
-    // private static JLabel createSurnameLabel;
-    // private static JTextField createDniText;
-    // private static JTextField createNameText;
-    // private static JTextField createPasswordText;
-    // private static JTextField createSurnameText;
-    // private static JLabel createTitle;
-    // private static Button newCreateButton;
 
-
-    private static List<User> users = new ArrayList<>();
     private static InputValidator inputValidator = new InputValidator();
 
     public static void main(String[] args) {
@@ -60,9 +38,7 @@ public class GUI implements ActionListener {
         frame.setSize(500,350);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        
         //>>>>>>>>>> LOGIN SCENE  >>>>>>>>>>
-
         frame.add(loginScene.loginPanel);
 
 
