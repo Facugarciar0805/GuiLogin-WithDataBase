@@ -1,57 +1,45 @@
 package org.example;
 
-import javax.swing.*;
-
-
-import org.example.Items.Button;
-import org.example.Items.CreateScene;
-import org.example.Items.LoginScene;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import org.example.Items.CreateScene;
+import org.example.Items.LoginScene;
 
 public class GUI implements ActionListener {
 
-    private static Menu menu;
-
+    private static Menu menu;   
     private static JFrame frame;
-
-    //login scene
-    private static LoginScene loginScene;
-
-    //create scene
-    private static CreateScene createScene;
-
-    private static InputValidator inputValidator = new InputValidator();
+    private static LoginScene loginScene;                                    //Class that contains items for the login scene
+    private static CreateScene createScene;                                 //Class that contains items for the create scene
+    private static InputValidator inputValidator = new InputValidator();   //Class to validate inputs
 
     public static void main(String[] args) {
 
         menu = new Menu();
         loginScene = new LoginScene();
         
-        frame = new JFrame();
+        frame = new JFrame();                                               //Create tha frame, the window that will open on screen
         frame.setSize(500,350);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //>>>>>>>>>> LOGIN SCENE  >>>>>>>>>>
-        frame.add(loginScene.loginPanel);
-
-
-        //>>>>>>>>>>>>> CREATE SCENE >>>>>>>>>>>>
-        createScene = new CreateScene();
+        frame.add(loginScene.loginPanel);                                   //Adds the loginScene to the frame.
         
-
+        //>>>>>>>>>>>>> CREATE SCENE >>>>>>>>>>>>
+        createScene = new CreateScene();                                    //Initialize the create scene
+        
         frame.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
 
         String os = System.getProperty("os.name").toLowerCase();
         String pythonString = "python3";
@@ -61,10 +49,7 @@ public class GUI implements ActionListener {
             pythonString = "python3";
         }
         
-        String name;
-        String password;
-        String surname;
-        String dni;
+        String name, password, surname, dni;
         
         String command = e.getActionCommand();
         System.out.println(command);

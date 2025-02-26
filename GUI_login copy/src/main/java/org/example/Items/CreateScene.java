@@ -19,6 +19,8 @@ public class CreateScene {
     public JTextField createSurnameText;
     public JLabel createTitle;
     public Button newCreateButton;
+    
+
     public CreateScene(){
         createPanel = new JPanel();
         createPanel.setLayout(null);
