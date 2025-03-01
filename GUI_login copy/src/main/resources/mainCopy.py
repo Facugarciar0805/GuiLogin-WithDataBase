@@ -33,8 +33,8 @@ elif choice == "2":
     passwdDb = cursor.fetchall()
     passwdDb = str(passwdDb)
     passwdDb = re.sub(r"[\[\]'(),\s]", "", passwdDb)
-    print("passwd: ",passwd)
-    print("passwdDb: ",passwdDb)
+    #print("passwd: ",passwd)
+    #print("passwdDb: ",passwdDb)
     if(passwdDb == passwd ):
         print("True")
     else:

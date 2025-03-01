@@ -55,7 +55,13 @@ public class GUI implements ActionListener {
             pythonString = "python3";
         }
         
-        String name, password, surname, dni;
+        String name, password, surname, dni, dateBorn, facultad, stack;
+        name = "null";
+        surname = "null";
+        dateBorn = "null";
+        facultad = "null";
+        stack = "null";
+        dni = "null";
         
         String command = e.getActionCommand();
         System.out.println(command);
@@ -69,15 +75,27 @@ public class GUI implements ActionListener {
                 }
                 try {
                     String arg = "2";
-                    ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, dni, "No hace falta", "No hace falta", password);
+                    ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, dni, name, surname, password, dateBorn, facultad, stack);
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
                         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
                         String line;
+                        boolean found = true;
                         while ((line = reader.readLine()) != null) {
                             System.out.println(line);  // Print Python script output
+                            if(line.equals("False")){
+                                found = false;
+                            }
                         }
+                        if(!found){
+                            loginScene.success.setText("Contraseña Incorrecta");
+                            break;
+                        }
+                        // if(line.equals("False")){
+                        //     loginScene.success.setText("Contraseña Incorrecta");
+                        //     break;
+                        // }
                         int exitCode = process.waitFor();
                         System.out.println("Python script finished with exit code: " + exitCode);
                     }catch(IOException | InterruptedException exception){
@@ -88,7 +106,9 @@ public class GUI implements ActionListener {
                 catch(IOException exception){
                     System.out.print("FALLAAA");
                 }
-                loginScene.success.setText("Usuario ingresado correctamente");
+                loginScene.userText.setText("");
+                loginScene.passwordText.setText("");
+                loginScene.success.setText("");
                 switchScene(frame, mainMenuScene.mainMenuPanel);
                 break;
             case "Create Account":
@@ -127,7 +147,7 @@ public class GUI implements ActionListener {
             
                 try {
                     String arg = "1";
-                    ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, dni, name, surname, password);
+                    ProcessBuilder processBuilder = new ProcessBuilder(pythonString, "GUI_login copy/src/main/resources/mainCopy.py", arg, dni, name, surname, password, dateBorn, facultad, stack);
                     processBuilder.redirectErrorStream(true);
                     Process process = processBuilder.start();
                     try {
