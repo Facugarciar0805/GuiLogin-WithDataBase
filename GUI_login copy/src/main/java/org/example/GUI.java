@@ -149,6 +149,9 @@ public class GUI implements ActionListener {
                     
 
                 break;
+            case "Back to Menu":
+                switchScene(frame, loginScene.loginPanel);
+                break;
             default:
                 throw new IllegalStateException("Que mierda es eso?");
 
