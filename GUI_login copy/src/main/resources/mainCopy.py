@@ -33,9 +33,10 @@ elif choice == "2":
     print("passwd: ",passwd)
     print("passwdDb: ",passwdDb)
     if(passwdDb == passwd ):
-        print("El usuario existe y es correcto")
+        print("True")
     else:
-        print("Contraseña incorrecta")
+        print("False")
+        
     #for fila in resultados:
         #print(fila)
 
