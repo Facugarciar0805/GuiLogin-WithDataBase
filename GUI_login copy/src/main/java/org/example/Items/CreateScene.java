@@ -19,6 +19,7 @@ public class CreateScene {
     public JTextField createSurnameText;
     public JLabel createTitle;
     public Button newCreateButton;
+    public Button backToMenu;
     
 
     public CreateScene(){
@@ -64,6 +65,12 @@ public class CreateScene {
         newCreateButton = new Button("Create your Account", 10, 160, 165, 25);
         createPanel.add(newCreateButton.button);
         newCreateButton.addListener(new GUI());
+
+        backToMenu = new Button("Back to Menu", 10, 190 , 130, 25);
+        createPanel.add(backToMenu.button);
+        backToMenu.addListener(new GUI());
+
+        
     }
     
 }
