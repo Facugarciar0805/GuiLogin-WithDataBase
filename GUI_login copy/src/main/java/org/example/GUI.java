@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import org.example.Items.CreateScene;
 import org.example.Items.LoginScene;
+import org.example.Items.MainMenuScene;
 
 public class GUI implements ActionListener {
 
@@ -18,22 +19,27 @@ public class GUI implements ActionListener {
     private static JFrame frame;
     private static LoginScene loginScene;                                    //Class that contains items for the login scene
     private static CreateScene createScene;                                 //Class that contains items for the create scene
-    private static InputValidator inputValidator = new InputValidator();   //Class to validate inputs
+    private static MainMenuScene mainMenuScene;                            //Class that contains items for the main menu scene
+    private static InputValidator inputValidator = new InputValidator();  //Class to validate inputs
 
     public static void main(String[] args) {
 
         menu = new Menu();
-        loginScene = new LoginScene();
+        
         
         frame = new JFrame();                                               //Create tha frame, the window that will open on screen
         frame.setSize(500,350);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //>>>>>>>>>> LOGIN SCENE  >>>>>>>>>>
+        loginScene = new LoginScene();
         frame.add(loginScene.loginPanel);                                   //Adds the loginScene to the frame.
         
         //>>>>>>>>>>>>> CREATE SCENE >>>>>>>>>>>>
         createScene = new CreateScene();                                    //Initialize the create scene
+
+        //>>>>>>>>>>>>> MAIN MENU SCENE >>>>>>>>
+        mainMenuScene = new MainMenuScene();
         
         frame.setVisible(true);
     }
@@ -83,6 +89,7 @@ public class GUI implements ActionListener {
                     System.out.print("FALLAAA");
                 }
                 loginScene.success.setText("Usuario ingresado correctamente");
+                switchScene(frame, mainMenuScene.mainMenuPanel);
                 break;
             case "Create Account":
                 switchScene(frame, createScene.createPanel);
@@ -147,9 +154,11 @@ public class GUI implements ActionListener {
                 createScene.createSurnameText.setText("");
                 loginScene.success.setText("Account created succesfully");
                     
-
                 break;
             case "Back to Menu":
+                switchScene(frame, loginScene.loginPanel);
+                break;
+            case "Back to Log In":
                 switchScene(frame, loginScene.loginPanel);
                 break;
             default:
