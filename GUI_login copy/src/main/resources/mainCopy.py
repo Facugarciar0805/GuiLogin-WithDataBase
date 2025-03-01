@@ -7,6 +7,9 @@ name = sys.argv[3]
 dni = sys.argv[2]
 surname = sys.argv[4]
 passwd = sys.argv[5]
+dateBorn = sys.argv[6]
+facultad = sys.argv[7]
+stack = sys.argv[8]
 
 
 conexion = mysql.connector.connect(user = 'uedpuxpbdtabbhho',  password = 'RrODXbDs6qHJc2Ald9HC', 
