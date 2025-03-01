@@ -24,7 +24,7 @@ public class GUI implements ActionListener {
 
     public static void main(String[] args) {
 
-        menu = new Menu();
+        menu = new Menu();          //No se para que esta esta linea pero por las dudas la dejo ahi
         
         
         frame = new JFrame();                                               //Create tha frame, the window that will open on screen
