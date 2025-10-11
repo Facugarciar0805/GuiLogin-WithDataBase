@@ -1,6 +1,6 @@
 # 🧩 GuiLogin-WithDataBase
 
-Este es un proyecto **ultra simple** hecho con **Java** para crear una pequeña **interfaz gráfica de login**, que se comunica con un **script en Python** encargado de verificar las credenciales del usuario contra una **API conectada a una base de datos online**.
+Este es un proyecto **ultra simple** hecho con **Java** para crear una pequeña **interfaz gráfica de login**, que se comunica con un **script en Python** encargado de verificar las credenciales del usuario directamente en una **base de datos MySQL alojada en la nube**.
 
 ---
 
@@ -11,8 +11,8 @@ El programa muestra una ventana con campos de **usuario** y **contraseña**, y u
 
 Al presionar el botón:
 1. El programa Java envía las credenciales al script Python.
-2. El script Python llama a una **API REST** que consulta una base de datos online.
-3. Si las credenciales son correctas, el GUI muestra un mensaje de éxito.  
+2. El script Python se conecta directamente a una base de datos MySQL remota.
+3. Si las credenciales existen en la base, el GUI muestra un mensaje de éxito.  
    Si no, muestra un error de autenticación.
 
 ---
@@ -25,7 +25,10 @@ Al presionar el botón:
 
 ### ⚙️ Backend
 - Python 3.x  
-- `requests` (para conectar con la API)
-- API REST (para la base de datos remota)
+- `mysql.connector` (para conectarse a la base de datos)
+- Base de datos MySQL alojada en Clever Cloud
 
 ---
+
+## 📂 Estructura del proyecto
+
